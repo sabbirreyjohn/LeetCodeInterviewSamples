@@ -1,5 +1,7 @@
+import java.lang.Math.abs
+
 fun main() {
-print(6%11)
+    print(singleNumber(intArrayOf(2, 2, 1)))
 }
 
 //1
@@ -37,5 +39,46 @@ fun rotate(nums: IntArray, k: Int): Unit {
         nums[0] = temp
     }
 
+}
+
+//4
+fun containsDuplicate(nums: IntArray): Boolean {
+    var sets = nums.toSet()
+    if (nums.size != sets.size)
+        return true
+    return false
+}
+
+//5
+fun singleNumber(nums: IntArray): Int {
+    var res = 0
+    var map = mutableMapOf<Int, Int>()
+    for (i in nums.indices) {
+        if (map.get(nums[i]) == null) {
+            map.put(nums[i], 1)
+        } else {
+            map.put(nums[i], map.get(nums[i])!! + 1)
+        }
+    }
+
+    map.onEach {
+        if (it.value == 1)
+            res = it.key
+    }
+    return res
+}
+
+//6
+fun intersect(nums1: IntArray, nums2: IntArray): IntArray {
+    val largeList = if(nums1.size>= nums2.size) nums1 else nums2
+    val smalList = if(nums1.size>= nums2.size) nums2 else nums1
+    var intList = mutableListOf<Int>()
+    for (index in 0..smalList.size-1){
+        if(largeList.contains(smalList[index])){
+            intList.add(smalList[index])
+            largeList[largeList.indexOf(smalList[index])] = -1
+        }
+    }
+    return intList.toIntArray()
 }
 
