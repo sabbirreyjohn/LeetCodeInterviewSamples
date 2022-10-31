@@ -84,28 +84,40 @@ fun intersect(nums1: IntArray, nums2: IntArray): IntArray {
 }
 
 fun plusOne(digits: IntArray): IntArray {
-    for(currentIndex in digits.size-1 downTo 0){
-        if(digits[currentIndex]<9){
-            digits[currentIndex]+=1
+    for (currentIndex in digits.size - 1 downTo 0) {
+        if (digits[currentIndex] < 9) {
+            digits[currentIndex] += 1
             return digits
         }
-        digits[currentIndex]=0
+        digits[currentIndex] = 0
     }
-    var result = IntArray(digits.size+1)
-    result[0] =1
+    var result = IntArray(digits.size + 1)
+    result[0] = 1
     return result
 }
 
 fun moveZeroes(nums: IntArray): Unit {
     var inserPosition = 0
-    for(i in nums.indices){
-        if(nums[i]!=0){
+    for (i in nums.indices) {
+        if (nums[i] != 0) {
             nums[inserPosition] = nums[i]
             inserPosition++
         }
     }
-    for(i in inserPosition..nums.size-1){
-        nums[i] =0
+    for (i in inserPosition..nums.size - 1) {
+        nums[i] = 0
     }
+}
+
+fun twoSum(nums: IntArray, target: Int): IntArray {
+    for (i in 0..nums.size - 1) {
+        for (j in 1..nums.size - 1) {
+            if (nums[i] + nums[j] == target && i!=j){
+                var result = intArrayOf(i, j)
+                return result
+            }
+        }
+    }
+    return intArrayOf(0,0)
 }
 
