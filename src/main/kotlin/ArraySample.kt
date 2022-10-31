@@ -1,7 +1,8 @@
 import java.lang.Math.abs
+import java.math.BigInteger
 
 fun main() {
-    print(singleNumber(intArrayOf(2, 2, 1)))
+    moveZeroes(intArrayOf(0, 1, 0, 3, 12))
 }
 
 //1
@@ -70,15 +71,41 @@ fun singleNumber(nums: IntArray): Int {
 
 //6
 fun intersect(nums1: IntArray, nums2: IntArray): IntArray {
-    val largeList = if(nums1.size>= nums2.size) nums1 else nums2
-    val smalList = if(nums1.size>= nums2.size) nums2 else nums1
+    val largeList = if (nums1.size >= nums2.size) nums1 else nums2
+    val smalList = if (nums1.size >= nums2.size) nums2 else nums1
     var intList = mutableListOf<Int>()
-    for (index in 0..smalList.size-1){
-        if(largeList.contains(smalList[index])){
+    for (index in 0..smalList.size - 1) {
+        if (largeList.contains(smalList[index])) {
             intList.add(smalList[index])
             largeList[largeList.indexOf(smalList[index])] = -1
         }
     }
     return intList.toIntArray()
+}
+
+fun plusOne(digits: IntArray): IntArray {
+    for(currentIndex in digits.size-1 downTo 0){
+        if(digits[currentIndex]<9){
+            digits[currentIndex]+=1
+            return digits
+        }
+        digits[currentIndex]=0
+    }
+    var result = IntArray(digits.size+1)
+    result[0] =1
+    return result
+}
+
+fun moveZeroes(nums: IntArray): Unit {
+    var inserPosition = 0
+    for(i in nums.indices){
+        if(nums[i]!=0){
+            nums[inserPosition] = nums[i]
+            inserPosition++
+        }
+    }
+    for(i in inserPosition..nums.size-1){
+        nums[i] =0
+    }
 }
 
