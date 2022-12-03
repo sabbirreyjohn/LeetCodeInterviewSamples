@@ -3,7 +3,9 @@ import java.math.BigInteger
 import java.util.LinkedList
 
 fun main() {
-    moveZeroes(intArrayOf(0, 1, 0, 3, 12))
+    smallerNumbersThanCurrent(intArrayOf(8, 1, 2, 2, 3)).forEach {
+        print("$it ")
+    }
 }
 
 //1
@@ -201,4 +203,56 @@ fun numIdenticalPairs(nums: IntArray): Int {
         }
     }
     return output
+}
+
+fun mostWordsFound(sentences: Array<String>): Int {
+
+    var maxWords = 0
+    for (i in sentences.indices) {
+        if (sentences[i].split(" ").size > maxWords) {
+            maxWords = sentences[i].split(" ").size
+        }
+    }
+    return maxWords
+}
+
+fun kidsWithCandies(candies: IntArray, extraCandies: Int): List<Boolean> {
+    var boolList = mutableListOf<Boolean>()
+    var max = candies[0]
+    for (i in candies.indices) {
+        if (candies[i] > max) max = candies[i]
+    }
+    for (i in candies.indices) {
+        boolList.add(candies[i] + extraCandies >= max)
+    }
+    return boolList
+}
+
+fun smallerNumbersThanCurrent(nums: IntArray): IntArray {
+
+    var resultList = mutableListOf<Int>()
+    for (i in nums.indices) {
+        var totalMin = 0
+        for (j in nums.indices) {
+            if (i != j) {
+                if (nums[j] < nums[i]) {
+                    totalMin++
+                }
+            }
+        }
+        resultList.add(totalMin)
+    }
+    return resultList.toIntArray()
+}
+
+fun decompressRLElist(nums: IntArray): IntArray {
+    var result = mutableListOf<Int>()
+    for (i in 0..nums.size - 1 step 2) {
+        var freq = nums[i]
+        var value = nums[i + 1]
+        for (i in 1..freq) {
+            result.add(value)
+        }
+    }
+    return result.toIntArray()
 }

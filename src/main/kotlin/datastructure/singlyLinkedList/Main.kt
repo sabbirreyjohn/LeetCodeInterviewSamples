@@ -1,5 +1,6 @@
 package singlyLinkedList
 
+import com.sun.source.tree.BinaryTree
 import singlyLinkedList.stack.Stack
 
 
@@ -15,5 +16,8 @@ fun main() {
     stack.push(1)
     stack.push(2)
     stack.push(3)
+    stack.pop()
     println(stack.peek())
+
+
 }
