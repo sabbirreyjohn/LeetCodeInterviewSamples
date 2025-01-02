@@ -1,5 +1,8 @@
+import java.util.*
+
+
 fun main() {
-    print(isPalindrome("A man, a plan, a canal: Panama"))
+    print(validParenthesis("({}[])"))
 }
 
 fun reverseString(s: CharArray): Unit {
@@ -9,6 +12,31 @@ fun reverseString(s: CharArray): Unit {
         s[i] = s[s.size - 1 - i]
         s[s.size - 1 - i] = temp
     }
+}
+
+fun validParenthesis(s: String): Boolean {
+
+    val array = s.toCharArray()
+    val theMap = mutableMapOf('(' to ')', '{' to '}', '[' to ']')
+    val stack: Stack<Char> = Stack<Char>()
+    for (c in array) {
+        if (theMap.containsKey(c)) {
+            stack.push(theMap.get(c))
+        } else {
+            if (stack.isNotEmpty()) {
+                val peekChar = stack.peek()
+                if (c.equals(peekChar)) {
+                    stack.pop()
+                }else{
+                    return false
+                }
+            } else{
+                return false
+            }
+        }
+    }
+    return stack.size == 0
+
 }
 
 fun reverse(x: Int): Int {
@@ -55,7 +83,7 @@ fun isAnagram(s: String, t: String): Boolean {
 
 fun isPalindrome(s: String): Boolean {
     val regex = Regex("[^A-Za-z0-9]")
-    var sArray = regex.replace(s.replace(" ", "").toLowerCase(),"").toCharArray()
+    var sArray = regex.replace(s.replace(" ", "").toLowerCase(), "").toCharArray()
     for (i in 0..(sArray.size - 1) / 2) {
         if (!sArray[i].equals(sArray[sArray.size - 1 - i]))
             return false
