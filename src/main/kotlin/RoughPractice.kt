@@ -6,10 +6,53 @@ fun main() {
 //    changePrimitive(x)
 //    println(x)
 
-    var p= Pass(5)
-    println(p.value)
-    changeObject(p)
-    println(p.value)
+    for (i in mergeSortedArray(intArrayOf(1, 1, 3, 5), intArrayOf(1, 2, 4, 6))) {
+        print(i)
+    }
+}
+
+fun twoSum(nums: IntArray, target: Int): IntArray {
+
+    val seen = mutableMapOf<Int, Int>()
+    for(i in nums.indices){
+        val num = nums[i]
+        val need = target - num
+        val j = seen[need]
+        if(j!=null)
+            return intArrayOf(j,i)
+            seen[num] = i
+    }
+    return intArrayOf()
+}
+
+fun mergeSortedArray(array1: IntArray, array2: IntArray): IntArray {
+    val finalArray = mutableListOf<Int>()
+    var i = 0
+    var j = 0
+
+    while (i < array1.size && j < array2.size) {
+        if (array1[i] < array2[j]) {
+            finalArray.add(array1[i])
+            i++
+        } else {
+            finalArray.add(array2[j])
+            j++
+        }
+    }
+
+    while (i < array1.size) {
+        finalArray.add(array1[i])
+        i++
+    }
+
+    while (j < array2.size) {
+        finalArray.add(array2[j])
+        j++
+    }
+
+
+    return finalArray.toIntArray()
+
 }
 
 fun changePrimitive(num: Int) {

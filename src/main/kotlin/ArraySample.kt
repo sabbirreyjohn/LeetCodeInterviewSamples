@@ -112,18 +112,6 @@ fun moveZeroes(nums: IntArray): Unit {
     }
 }
 
-fun twoSum(nums: IntArray, target: Int): IntArray {
-    for (i in 0..nums.size - 1) {
-        for (j in 1..nums.size - 1) {
-            if (nums[i] + nums[j] == target && i != j) {
-                var result = intArrayOf(i, j)
-                return result
-            }
-        }
-    }
-    return intArrayOf(0, 0)
-}
-
 fun buildArray(nums: IntArray): IntArray {
     var resultArray = mutableListOf<Int>()
     for (i in nums.indices) {

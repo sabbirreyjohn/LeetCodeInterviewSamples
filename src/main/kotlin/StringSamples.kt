@@ -2,7 +2,7 @@ import java.util.*
 
 
 fun main() {
-    print(validParenthesis("({}[])"))
+    println(reverseVowels("IceCreAm"))
 }
 
 fun reverseString(s: CharArray): Unit {
@@ -12,6 +12,54 @@ fun reverseString(s: CharArray): Unit {
         s[i] = s[s.size - 1 - i]
         s[s.size - 1 - i] = temp
     }
+}
+
+fun wordPattern(pattern: String, s: String): Boolean {
+    val sArray = s.split(" ").toMutableList()
+    val theMap = mutableMapOf<Char, String>()
+    if (pattern.length != sArray.size) {
+        return false
+    }
+
+    for (i in sArray.indices) {
+
+        if (theMap.containsKey(pattern[i]) && theMap.containsValue(sArray[i])) {
+            return false
+
+        } else {
+            theMap[pattern[i]] = sArray[i]
+        }
+    }
+
+    return true
+}
+
+fun findTheDifference(s: String, t: String): Char {
+    var theSMap = mutableMapOf<Char, Int>()
+    var theTmap = mutableMapOf<Char, Int>()
+    for (char in s) {
+        theTmap.put(char, theTmap.getOrDefault(char, 0) + 1)
+    }
+    if(theSMap.keys.equals(t))
+}
+
+fun reverseVowels(s: String): String {
+//IceCreAm
+    var setVowels = mutableSetOf('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U')
+    var vowelArray =
+        s.filter {
+            setVowels.contains(it)
+        }.reversed()
+    var charArray = s.toCharArray()
+    var vowelIndex = 0
+    for (i in charArray.indices) {
+        if (setVowels.contains(s[i])) {
+            charArray[i] = vowelArray[vowelIndex]
+            vowelIndex++
+        }
+    }
+    return charArray.concatToString()
+
 }
 
 fun validParenthesis(s: String): Boolean {
@@ -27,10 +75,10 @@ fun validParenthesis(s: String): Boolean {
                 val peekChar = stack.peek()
                 if (c.equals(peekChar)) {
                     stack.pop()
-                }else{
+                } else {
                     return false
                 }
-            } else{
+            } else {
                 return false
             }
         }
